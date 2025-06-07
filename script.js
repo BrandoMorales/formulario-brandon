@@ -77,3 +77,37 @@ function actualizarProgreso() {
     progreso.value = progresoTotal;
     porcentajeTexto.innerText = progresoTotal + '%';
 }
+document.getElementById('miFormulario').addEventListener('submit'), function (evento) {
+    evento.preventDefault();
+
+     }
+
+     const emailInput = document.getElementById('email');
+const errorEmail = document.getElementById('errorEmail');
+
+emailInput.addEventListener('input', function() {
+    const valor = emailInput.value.trim();
+    if (!validarEmail(valor)) {
+        errorEmail.textContent = 'Correo no válido. Debe ser formato ejemplo@correo.com';
+        emailInput.setCustomValidity('Correo inválido');
+    } else {
+        errorEmail.textContent = '';
+        emailInput.setCustomValidity('');
+    }
+});
+
+function validarEmail(email) {
+    // Expresión regular básica para validar email
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
+
+// Evitar copiar, pegar y cortar (ya está con oncopy, onpaste, oncut en HTML)
+// Pero reforzamos con JS para prevenir por si acaso:
+
+['copy', 'paste', 'cut'].forEach(evento => {
+    emailInput.addEventListener(evento, e => {
+        e.preventDefault();
+        alert('No está permitido copiar, pegar o cortar en este campo.');
+    });
+});
